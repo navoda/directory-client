@@ -18,6 +18,9 @@ import config.OtherOptionNumberRegistry;
 import org.eclipse.californium.core.CoapClient;
 import org.eclipse.californium.core.coap.*;
 
+/**
+ * Client for the Virtual Firealarm API in the RD
+ */
 class VirtualFirealarmClient extends CoapClient{
 
 	private static final String VIRTUAL_FIREALARM = "/virtual_firealarm";
@@ -36,6 +39,12 @@ class VirtualFirealarmClient extends CoapClient{
 		return rdEndpoint;
 	}
 
+	/**
+	 *
+	 * @param deviceId - ID of the Firealarm
+	 * @param state - buzzer state (on/off)
+	 * @return - created request
+	 */
 	Request virtualFirealarmBuzz(String deviceId, String state) {
 
 		Request request = new Request(CoAP.Code.POST, CoAP.Type.CON);
@@ -53,7 +62,6 @@ class VirtualFirealarmClient extends CoapClient{
 
 		return request;
 	}
-
 
 
 }

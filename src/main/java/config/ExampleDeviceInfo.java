@@ -16,7 +16,7 @@ package config;
 
 public class ExampleDeviceInfo {
 
-	public static final String VIRTUAL_FIREALARM_DEVICE_ID="t4yy5b1v5smo";
+	public static final String VIRTUAL_FIREALARM_DEVICE_ID="t4vou797bmuc";
 
 
 }

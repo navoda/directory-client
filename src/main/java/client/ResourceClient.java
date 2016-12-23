@@ -37,6 +37,9 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.Properties;
 
+/**
+ * The end user client for the RD (Resource Directory)
+ */
 public class ResourceClient extends CoapClient {
 
 	private static final Log log = LogFactory.getLog(ResourceClient.class);
@@ -60,7 +63,7 @@ public class ResourceClient extends CoapClient {
 		readClientConfig();
 		//oauth client
 		this.oAuthClient = new OAuthClient(this.endpoint, this.clientConfig);
-		if(!oAuthClient.isRegistered())
+		//if(!oAuthClient.isRegistered())
 			registerOauthTokenEndpoint();
 		this.clientConfig = oAuthClient.init();
 
@@ -92,7 +95,12 @@ public class ResourceClient extends CoapClient {
 		}
 	}
 
-
+	/**
+	 *
+	 * @param client - device client
+	 * @param request - coap API request
+	 * @param turn - number of times the request has send.
+	 */
 	private void sendRequest(CoapClient client, Request request, int turn) {
 		//set authorization option
 		OptionSet options = request.getOptions();

@@ -13,6 +13,9 @@ package config;/*
  * specific language governing permissions and limitations under the License.
  */
 
+/**
+ * This class stores the Directory Client config
+ */
 public class RDClientConfig {
 
 	private String tenantDomain;

@@ -15,6 +15,9 @@ package config;/*
 
 import org.eclipse.californium.core.coap.OptionNumberRegistry;
 
+/**
+ * same Other Option Number Registry in org.wso2.carbon.device.mgt.input.adapter.coap.resourceDirectory.coap
+ */
 public final class OtherOptionNumberRegistry {
 
 	public static final int AUTHORIZATION = 65000;

@@ -27,6 +27,10 @@ import org.eclipse.californium.core.coap.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * This class is used to get oAuth Tokens from the IoT Server token endpoint.
+ * Sends the requests through RD CoAP Server.
+ */
 class OAuthClient extends CoapClient{
 
 	private static final Log log = LogFactory.getLog(OAuthClient.class);
