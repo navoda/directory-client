@@ -83,13 +83,13 @@ class OAuthClient extends CoapClient{
 		request.setPayload(payload);
 		request.setOptions(options);
 
-		log.info(this.getURI()+"\n"+Utils.prettyPrint(request));
+		log.info(Utils.prettyPrint(request));
 
 		//send response
 		CoapResponse response=this.advanced(request);
 		if(response.isSuccess())
 		{
-			log.info(response.getCode().name()+"\n"+Utils.prettyPrint(response));
+			log.info(Utils.prettyPrint(response));
 			if(response.getCode()== CoAP.ResponseCode.CONTENT)
 			{
 				if(!response.getResponseText().isEmpty())
@@ -99,7 +99,7 @@ class OAuthClient extends CoapClient{
 		}
 		else
 		{
-			log.info(response.getCode().name()+"\n"+Utils.prettyPrint(response));
+			log.info(Utils.prettyPrint(response));
 		}
 
 	}

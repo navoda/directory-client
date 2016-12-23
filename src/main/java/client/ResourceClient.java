@@ -60,7 +60,7 @@ public class ResourceClient extends CoapClient {
 		readClientConfig();
 		//oauth client
 		this.oAuthClient = new OAuthClient(this.endpoint, this.clientConfig);
-//		if(!oAuthClient.isRegistered())
+		if(!oAuthClient.isRegistered())
 			registerOauthTokenEndpoint();
 		this.clientConfig = oAuthClient.init();
 
@@ -77,13 +77,10 @@ public class ResourceClient extends CoapClient {
 			switch (requestEndpoint)
 			{
 			case 1://buzz_on
-				request=virtualFirealarmClient.buzz(ExampleDeviceInfo.VIRTUAL_FIREALARM_DEVICE_ID,"on");
+				request=virtualFirealarmClient.virtualFirealarmBuzz(ExampleDeviceInfo.VIRTUAL_FIREALARM_DEVICE_ID,"on");
 				break;
 			case 2://buzz_off
-				request=virtualFirealarmClient.buzz(ExampleDeviceInfo.VIRTUAL_FIREALARM_DEVICE_ID,"off");
-				break;
-			case 3://stats
-				request=virtualFirealarmClient.stats(ExampleDeviceInfo.VIRTUAL_FIREALARM_DEVICE_ID,ExampleDeviceInfo.FIREALARM_TO,ExampleDeviceInfo.FIREALARM_FROM);
+				request=virtualFirealarmClient.virtualFirealarmBuzz(ExampleDeviceInfo.VIRTUAL_FIREALARM_DEVICE_ID,"off");
 				break;
 			default:log.info("Invalid Request Endpoint");
 			}
@@ -102,20 +99,22 @@ public class ResourceClient extends CoapClient {
 		options.addOption(
 				new Option(OtherOptionNumberRegistry.AUTHORIZATION, "Bearer " + this.clientConfig.getAuthToken()));
 		request.setOptions(options);
-		log.info(client.getURI()+"\n"+Utils.prettyPrint(request));
+		Utils.prettyPrint(request);
 		CoapResponse response = client.advanced(request);
 		if (response != null) {
 			CoAP.ResponseCode code = response.getCode();
+			log.info(code.toString());
 			//success
 			if (CoAP.ResponseCode.isSuccess(code)) {
-				log.info(code.name()+"\n"+Utils.prettyPrint(response));
+				log.info(Utils.prettyPrint(response));
 			}
 			//failures
 			else {
-				log.error(code.name()+"\n"+Utils.prettyPrint(response));
+				log.error(Utils.prettyPrint(response));
 				//authorization failures
 				if (code.equals(CoAP.ResponseCode.UNAUTHORIZED) || code.equals(CoAP.ResponseCode.BAD_REQUEST)) {
-					this.clientConfig=this.oAuthClient.refreshAouthToken();
+					this.oAuthClient.refreshAouthToken();
+					log.error(Utils.prettyPrint(response));
 					//sending up to 3 times
 					if (turn < 3) {
 						log.info("Sending again with refresh token - turn" + (turn + 1));

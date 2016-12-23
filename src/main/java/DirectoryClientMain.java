@@ -49,7 +49,6 @@ public class DirectoryClientMain {
 					System.out.println("0. Return");
 					System.out.println("1. Buzzer on");
 					System.out.println("2. Buzzer off");
-					System.out.println("3. Stats");
 					break;
 				default:
 				}
@@ -58,12 +57,6 @@ public class DirectoryClientMain {
 					client.exampleRequest(deviceType, deviceEndpoint);
 			} else
 				run = false;
-
-			try {
-				Thread.sleep(2000);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
 		}
 
 		scanner.close();
