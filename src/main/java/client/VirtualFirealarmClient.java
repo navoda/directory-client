@@ -36,7 +36,7 @@ class VirtualFirealarmClient extends CoapClient{
 		return rdEndpoint;
 	}
 
-	Request virtualFirealarmBuzz(String deviceId, String state) {
+	Request buzz(String deviceId, String state) {
 
 		Request request = new Request(CoAP.Code.POST, CoAP.Type.CON);
 
@@ -54,6 +54,22 @@ class VirtualFirealarmClient extends CoapClient{
 		return request;
 	}
 
+	Request stats(String deviceId,long to, long from)
+	{
+		Request request= new Request(CoAP.Code.GET, CoAP.Type.CON);
+
+		String queryParam="?from="+from+"&to="+to;
+
+		//endpoint
+		this.setURI(this.rdEndpoint+DEVICE_STATS.replace("{deviceId}",deviceId)+queryParam);
+
+		//options
+		OptionSet options = new OptionSet();
+		options.addOption(new Option(OtherOptionNumberRegistry.CONTENT_TYPE,"application/json"));//content format for http
+		request.setOptions(options);
+
+		return request;
+	}
 
 
 }

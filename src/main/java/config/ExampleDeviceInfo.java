@@ -16,7 +16,9 @@ package config;
 
 public class ExampleDeviceInfo {
 
-	public static final String VIRTUAL_FIREALARM_DEVICE_ID="t4yy5b1v5smo";
+	public static final String VIRTUAL_FIREALARM_DEVICE_ID="t4vou797bmuc";
+	public static final long FIREALARM_FROM=1482411360;
+	public static final long FIREALARM_TO=1482411480;
 
 
 }
